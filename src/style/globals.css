@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+:root {
+    --color-Chart-Primary: #7a2c20;
+    --color-Chart-Secondary: #a84a3c;
+    --color-Chart-Accent1: #d9735d;
+    --color-Chart-Accent2: #5e2018;
+    --color-Chart-Accent3: #b24f3f;
+    --color-Chart-Background: #fff8f6;
+    --color-Text: #3e1f1a;
+}
+
+.orderImg {
+  background-image: url(./../../public/img/orderBgImage.svg);
+}
+
+@theme {
+    /* Light mode - Base colors */
+    --color-main: #7a2c20;
+    --color-Secondary: #a84a3c;
+    --color-Accent: #d9735d;
+    --color-Background: #fff8f6;
+    --color-Text: #3e1f1a;
+
+    /* Aside elements */
+    --color-Aside: #f8eae8;
+    --color-Aside-Border: #d36e5f;
+
+    /* Chart colors */
+    --color-Chart-Primary: #7a2c20;
+    --color-Chart-Secondary: #a84a3c;
+    --color-Chart-Accent1: #d9735d;
+    --color-Chart-Accent2: #5e2018;
+    --color-Chart-Accent3: #b24f3f;
+    --color-Chart-Background: #fff8f6;
+
+    /* Product CRUD interface colors */
+    --color-Success: #8b5e3c;
+    --color-Warning: #d98c4b;
+    --color-Danger: #b84f42;
+    --color-Info: #a36c66;
+    --color-Disabled: #e5d5d2;
+
+    /* Form element colors */
+    --color-Input-Background: #ffffff;
+    --color-Input-Border: #dbb4ad;
+    --color-Input-Focus: #7a2c20;
+}
+
+
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
