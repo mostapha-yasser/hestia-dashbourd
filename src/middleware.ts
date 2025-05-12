@@ -14,28 +14,30 @@ const publicRoutes = ["/login"];
 
 export default async function middleware(req: NextRequest) {
   const path = req.nextUrl.pathname;
-  const isProtectedRoutes = protectedRoutes.includes(path);
-  const isPublicRoutes = publicRoutes.includes(path);
-  const session = (await cookies()).get("session")?.value;
-  const payload = await decrypt(session);
-  if (isProtectedRoutes && !payload?.userId) {
+  const isProtectedRoute = protectedRoutes.includes(path);
+  const isPublicRoute = publicRoutes.includes(path);
+  
+  if (!isProtectedRoute && !isPublicRoute) {
+    return NextResponse.next();
+  }
+
+  const cookie = (await cookies()).get("session")?.value;
+  const payload = await decrypt(cookie);
+
+  if (isProtectedRoute && !payload?.userId) {
     return NextResponse.redirect(new URL("/login", req.url));
   }
-  if (isPublicRoutes && payload?.userId) {
+
+  if (isPublicRoute && payload?.userId) {
     return NextResponse.redirect(new URL("/", req.url));
   }
-  const res = NextResponse.next();
-  res.headers.set("Access-Control-Allow-Origin", "*");
-  res.headers.set(
-    "Access-Control-Allow-Methods",
-    "GET,OPTIONS,PATCH,DELETE,POST,PUT"
-  );
-  res.headers.set(
-    "Access-Control-Allow-Headers",
-    "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
-  );
-  return res;
+
+  return NextResponse.next();
 }
+
 export const config = {
-  matcher: "/api/:path*",
+  matcher: [
+   
+    "/((?!api|_next/static|_next/image|favicon.ico).*)",
+  ],
 };
